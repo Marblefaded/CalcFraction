@@ -1,0 +1,22 @@
+﻿@page "/"
+@inherits CalcView
+@using System.Text.RegularExpressions
+
+<h1 class="text-center">
+    Calculator for fractions
+</h1>
+
+<br />
+
+<div class="text-center">
+    <input @bind="expression" />
+</div>
+
+<br />
+
+<div class="text-center">
+    @if(expression != null)
+    {
+        @Calculate(expression)
+    }
+</div>
