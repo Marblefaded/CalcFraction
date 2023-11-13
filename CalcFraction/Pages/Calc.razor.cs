@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Calculator.Algorithm;
-using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace CalcFraction.Pages
 {
@@ -132,5 +131,50 @@ namespace CalcFraction.Pages
             }
             return temp.Peek();
         }
+
+        public string DoubleToNormalFraction()
+        {
+            var numeric = Calculate(expression);
+            //Разбиваем число на целую и дробную часть
+            var numericArray = numeric.ToString().Split(new[] { CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator }, StringSplitOptions.None);
+            var wholeStr = numericArray[0];
+            var fractionStr = "0";
+            if (numericArray.Length > 1)
+                fractionStr = numericArray[1];
+
+            //Получаем степень десятки, на которую нужно умножить число, чтобы дробь стала целым 
+            var power = fractionStr.Length;
+
+            //Получаем целую часть числителя и знаменатель
+            long whole = long.Parse(wholeStr) * 10;
+            long denominator = 10;
+            for (int i = 1; i < power; i++)
+            {
+                denominator = denominator * 10;
+                whole = whole * 10;
+            }
+
+            //получаем числитель
+            var numerator = long.Parse(fractionStr);
+            numerator = numerator + whole;
+
+
+            //Ищем общий знаменатель и делим на него
+            var index = 2;
+            while (index < denominator / 2) //Если дошли до половины, то там его нет. Тут вообще можно брать наименьшее из числителя и знаменателя
+            {
+                if (numerator % index == 0 && denominator % index == 0)
+                {
+                    numerator = numerator / index;
+                    denominator = denominator / index;
+                    index = 1; //При i++ будет увеличен до 2х
+                }
+                index++;
+            }
+
+            return $"{numerator}/{denominator}";
+        }
+
+        
     }
 }
