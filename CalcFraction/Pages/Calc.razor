@@ -10,15 +10,22 @@
 
 <div class="text-center">
     <input @bind="expression" />
+    = @answer
+    @if(fractions != null)
+    {
+        @fractions
+    }
 </div>
 
 <br />
 
 <div class="text-center">
-    @if(expression != null)
-    {
-        @Calculate(expression)
-        <br/>
-        @DoubleToNormalFraction()
-    }
+    <button class="btn btn-primary" @onclick="(()=>Calculate(expression))">
+        Calculate
+    </button>
+    <br/>
+    <button class="btn btn-primary" @onclick="(()=>DoubleToNormalFraction())">
+        Get fraction
+    </button>
 </div>
+
