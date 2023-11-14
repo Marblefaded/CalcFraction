@@ -9,23 +9,40 @@
 <br />
 
 <div class="text-center">
-    <input @bind="expression" />
-    = @answer
-    @if(fractions != null)
-    {
-        @fractions
-    }
+    <h3>
+        <input @bind="expression" />
+        = @answer
+        @if (fractions != null)
+        {
+            @fractions
+        }
+    </h3>
 </div>
-
 <br />
-
 <div class="text-center">
     <button class="btn btn-primary" @onclick="(()=>Calculate(expression))">
         Calculate
     </button>
-    <br/>
-    <button class="btn btn-primary" @onclick="(()=>DoubleToNormalFraction())">
+    <br />
+    <br />
+    <button class="btn btn-primary" @onclick="(()=>DoubleToNormalFraction(Convert.ToDouble(answer)))">
         Get fraction
     </button>
+    <br />
+    <br />
+    <h3>
+        Шаги
+        <br/>
+        @foreach (var str in iterations)
+        {
+            @str
+            <br />
+        }
+
+    </h3>
 </div>
+
+@code{
+
+}
 

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Globalization;
+using static System.Net.Mime.MediaTypeNames;
+using System.Text.RegularExpressions;
 
 namespace CalcFraction.Pages
 {
@@ -7,7 +9,8 @@ namespace CalcFraction.Pages
     {
         public string expression { get; set; }
         public string fractions { get; set; }
-        public double answer { get; set; }
+        public string answer { get; set; }
+        public List<string> iterations { get; set; } = new List<string>();
         public bool IsDelimeter(char c)
         {
             if ((" =".IndexOf(c) != -1))
@@ -34,13 +37,25 @@ namespace CalcFraction.Pages
                 default: return 6;
             }
         }
-
-        public double Calculate(string input)
+        public double Sqrt(double number)
         {
-            string output = GetExpression(input);
-            double result = Counting(output);
-            answer = result;
-            return answer;
+            return Math.Sqrt(number);
+        }
+
+        public string Calculate(string input)
+        {
+            if (!input.Contains('.') && !input.All(Char.IsLetter))
+            {
+                iterations.Clear();
+                string output = GetExpression(input);
+                double result = Counting(output);
+                answer = result.ToString();
+                return answer;
+            }
+            else
+            {
+                return answer = "Enter the correct string";
+            }
         }
 
         public string GetExpression(string input)
@@ -122,11 +137,26 @@ namespace CalcFraction.Pages
 
                     switch (input[i])
                     {
-                        case '+': result = b + a; break;
-                        case '-': result = b - a; break;
-                        case '*': result = b * a; break;
-                        case '/': result = b / a; break;
-                        case '^': result = double.Parse(Math.Pow(double.Parse(b.ToString()), double.Parse(a.ToString())).ToString()); break;
+                        case '+':
+                            result = b + a;
+                            iterations.Add($"{b} + {a} = {result}");
+                            break;
+                        case '-':
+                            result = b - a;
+                            iterations.Add($"{b} - {a} = {result}");
+                            break;
+                        case '*':
+                            result = b * a;
+                            iterations.Add($"{b} * {a} = {result}");
+                            break;
+                        case '/':
+                            result = b / a;
+                            iterations.Add($"{b} / {a} = {result}");
+                            break;
+                        case '^':
+                            result = double.Parse(Math.Pow(double.Parse(b.ToString()), double.Parse(a.ToString())).ToString());
+                            iterations.Add($"{b} ^ {a} = {result}");
+                            break;
                     }
                     temp.Push(result);
                 }
@@ -134,10 +164,9 @@ namespace CalcFraction.Pages
             return temp.Peek();
         }
 
-        public string DoubleToNormalFraction()
+        public string DoubleToNormalFraction(double numeric)
         {
-            var numeric = Calculate(expression);
-            //Разбиваем число на целую и дробную часть
+            numeric = Math.Round(numeric, 3);
             var numericArray = numeric.ToString().Split(new[] { CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator }, StringSplitOptions.None);
             var wholeStr = numericArray[0];
             var fractionStr = "0";
@@ -158,20 +187,20 @@ namespace CalcFraction.Pages
             numerator = numerator + whole;
 
             var index = 2;
-            while (index < denominator / 2) 
+            while (index < denominator / 2)
             {
                 if (numerator % index == 0 && denominator % index == 0)
                 {
                     numerator = numerator / index;
                     denominator = denominator / index;
-                    index = 1; 
+                    index = 1;
                 }
                 index++;
             }
-            
-            return fractions = " = "+ $"{numerator}/{denominator}";
+
+            return fractions = " = " + $"{numerator}/{denominator}";
         }
 
-        
+
     }
 }
