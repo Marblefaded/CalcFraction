@@ -44,7 +44,11 @@ namespace CalcFraction.Pages
 
         public string Calculate(string input)
         {
-            if (!input.Contains('.') && !input.All(Char.IsLetter))
+            if (Regex.IsMatch(input, @"[^0-9\,\+\-\*\/\(\)\^\s]"))
+            {
+                return answer = "Enter the correct string";
+            }
+            else
             {
                 iterations.Clear();
                 string output = GetExpression(input);
@@ -52,16 +56,12 @@ namespace CalcFraction.Pages
                 answer = result.ToString();
                 return answer;
             }
-            else
-            {
-                return answer = "Enter the correct string";
-            }
         }
 
         public string GetExpression(string input)
         {
             string output = string.Empty;
-            Stack<char> operStack = new Stack<char>();
+            Stack<char> operStack = new();
 
             for (int i = 0; i < input.Length; i++)
             {
@@ -113,7 +113,7 @@ namespace CalcFraction.Pages
         public double Counting(string input)
         {
             double result = 0;
-            Stack<double> temp = new Stack<double>();
+            Stack<double> temp = new();
 
             for (int i = 0; i < input.Length; i++)
             {
@@ -140,19 +140,19 @@ namespace CalcFraction.Pages
                         {
                             case '+':
                                 result = b + a;
-                                iterations.Add($"{b} + {a} = {result}");
+                                iterations.Add($"{b} + {a} = {DoubleToNormalFraction(result)}");
                                 break;
                             case '-':
                                 result = b - a;
-                                iterations.Add($"{b} - {a} = {result}");
+                                iterations.Add($"{b} - {a} = {DoubleToNormalFraction(result)}");
                                 break;
                             case '*':
                                 result = b * a;
-                                iterations.Add($"{b} * {a} = {result}");
+                                iterations.Add($"{b} * {a} = {DoubleToNormalFraction(result)}");
                                 break;
                             case '/':
                                 result = b / a;
-                                iterations.Add($"{b} / {a} = {result}");
+                                iterations.Add($"{b} / {a} = {DoubleToNormalFraction(result)}");
                                 break;
                             case '^':
                                 result = Math.Sqrt(b);
@@ -181,40 +181,54 @@ namespace CalcFraction.Pages
 
         public string DoubleToNormalFraction(double numeric)
         {
-            numeric = Math.Round(numeric, 3);
+            numeric = Math.Round(numeric, 5);
             var numericArray = numeric.ToString().Split(new[] { CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator }, StringSplitOptions.None);
+
             var wholeStr = numericArray[0];
             var fractionStr = "0";
+
             if (numericArray.Length > 1)
+            {
                 fractionStr = numericArray[1];
-
-            var power = fractionStr.Length;
-
-            long whole = long.Parse(wholeStr) * 10;
-            long denominator = 10;
-            for (int i = 1; i < power; i++)
-            {
-                denominator = denominator * 10;
-                whole = whole * 10;
             }
 
+            var wholeNumber = long.Parse(wholeStr);
             var numerator = long.Parse(fractionStr);
-            numerator = numerator + whole;
+            var denominator = Math.Pow(10, fractionStr.Length);
 
-            var index = 2;
-            while (index < denominator / 2)
+            var denominatorLong = (long)denominator; 
+
+            var gcd = GCD(numerator, denominatorLong);
+
+            numerator /= gcd;
+            denominatorLong /= gcd;
+
+            if (numerator == 0)
             {
-                if (numerator % index == 0 && denominator % index == 0)
-                {
-                    numerator = numerator / index;
-                    denominator = denominator / index;
-                    index = 1;
-                }
-                index++;
+                return fractions = $"{wholeNumber}";
             }
-
-            return fractions = " = " + $"{numerator}/{denominator}";
+            else if(wholeNumber == 0)
+            {
+                return fractions = $"{numerator}/{denominatorLong}";
+            }
+            else
+            {
+                return fractions = $"{wholeNumber}({numerator}/{denominatorLong})";
+            }
         }
+
+        private static long GCD(long a, long b)
+        {
+            while (b != 0)
+            {
+                var temp = b;
+                b = a % b;
+                a = temp;
+            }
+            return a;
+        }
+
+
 
 
     }
