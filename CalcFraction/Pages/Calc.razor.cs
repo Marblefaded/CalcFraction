@@ -46,7 +46,7 @@ namespace CalcFraction.Pages
         {
             if (Regex.IsMatch(input, @"[^0-9\,\+\-\*\/\(\)\^\s]"))
             {
-                return answer = "Enter the correct string";
+                return answer = "You have entered a string containing letters or invalid characters";
             }
             else
             {
@@ -134,32 +134,61 @@ namespace CalcFraction.Pages
                 {
                     if (input[i] != '^')
                     {
-                        double a = temp.Pop();
-                        double b = temp.Pop();
-                        switch (input[i])
+
+                        if (input[i] != '-')
                         {
-                            case '+':
-                                result = b + a;
-                                iterations.Add($"{b} + {a} = {DoubleToNormalFraction(result)}");
-                                break;
-                            case '-':
-                                result = b - a;
-                                iterations.Add($"{b} - {a} = {DoubleToNormalFraction(result)}");
-                                break;
-                            case '*':
-                                result = b * a;
-                                iterations.Add($"{b} * {a} = {DoubleToNormalFraction(result)}");
-                                break;
-                            case '/':
-                                result = b / a;
-                                iterations.Add($"{b} / {a} = {DoubleToNormalFraction(result)}");
-                                break;
-                            case '^':
-                                result = Math.Sqrt(b);
-                                iterations.Add($"sqrt({b}");
-                                break;
+                            double a = temp.Pop();
+                            if (temp.Count == 0)
+                            {
+                                result = 0 - a;
+                            }
+                            else
+                            {
+                                double b = temp.Pop();
+                                switch (input[i])
+                                {
+                                    case '+':
+                                        result = b + a;
+                                        iterations.Add($"{b} + {a} = {DoubleToNormalFraction(result)}");
+                                        break;
+                                    case '*':
+                                        result = b * a;
+                                        iterations.Add($"{b} * {a} = {DoubleToNormalFraction(result)}");
+                                        break;
+                                    case '/':
+                                        result = b / a;
+                                        iterations.Add($"{b} / {a} = {DoubleToNormalFraction(result)}");
+                                        break;
+                                }
+                            }
+                            
                         }
-                        
+                        else
+                        {
+                            double a = temp.Pop();
+                            if (temp.Count == 0)
+                            {
+                                switch (input[i])
+                                {
+                                    case '-':
+                                        result = 0 - a;
+                                        iterations.Add($"-{a} = {DoubleToNormalFraction(result)}");
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                double b = temp.Pop();
+                                switch (input[i])
+                                {
+                                    case '-':
+                                        result = b - a;
+                                        iterations.Add($"{b} - {a} = {DoubleToNormalFraction(result)}");
+                                        break;
+                                }
+                            }
+
+                        }
                     }
                     else
                     {
@@ -171,7 +200,7 @@ namespace CalcFraction.Pages
                                 iterations.Add($"sqrt({b})");
                                 break;
                         }
-                        
+
                     }
                     temp.Push(result);
                 }
@@ -196,7 +225,7 @@ namespace CalcFraction.Pages
             var numerator = long.Parse(fractionStr);
             var denominator = Math.Pow(10, fractionStr.Length);
 
-            var denominatorLong = (long)denominator; 
+            var denominatorLong = (long)denominator;
 
             var gcd = GCD(numerator, denominatorLong);
 
@@ -205,15 +234,36 @@ namespace CalcFraction.Pages
 
             if (numerator == 0)
             {
-                return fractions = $"{wholeNumber}";
+                if (numeric >= 0)
+                {
+                    return fractions = $"{wholeNumber}";
+                }
+                else
+                {
+                    return fractions = $"{wholeNumber}";
+                }
             }
-            else if(wholeNumber == 0)
+            else if (wholeNumber == 0)
             {
-                return fractions = $"{numerator}/{denominatorLong}";
+                if (numeric >= 0)
+                {
+                    return fractions = $"{numerator}/{denominatorLong}";
+                }
+                else
+                {
+                    return fractions = $"-{numerator}/{denominatorLong}";
+                }
             }
             else
             {
-                return fractions = $"{wholeNumber}({numerator}/{denominatorLong})";
+                if (numeric >= 0)
+                {
+                    return fractions = $"{wholeNumber}({numerator}/{denominatorLong})";
+                }
+                else
+                {
+                    return fractions = $"{wholeNumber}({numerator}/{denominatorLong})";
+                }
             }
         }
 
