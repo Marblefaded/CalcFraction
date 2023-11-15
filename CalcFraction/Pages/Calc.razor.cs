@@ -132,31 +132,46 @@ namespace CalcFraction.Pages
                 }
                 else if (IsOperator(input[i]))
                 {
-                    double a = temp.Pop();
-                    double b = temp.Pop();
-
-                    switch (input[i])
+                    if (input[i] != '^')
                     {
-                        case '+':
-                            result = b + a;
-                            iterations.Add($"{b} + {a} = {result}");
-                            break;
-                        case '-':
-                            result = b - a;
-                            iterations.Add($"{b} - {a} = {result}");
-                            break;
-                        case '*':
-                            result = b * a;
-                            iterations.Add($"{b} * {a} = {result}");
-                            break;
-                        case '/':
-                            result = b / a;
-                            iterations.Add($"{b} / {a} = {result}");
-                            break;
-                        case '^':
-                            result = double.Parse(Math.Pow(double.Parse(b.ToString()), double.Parse(a.ToString())).ToString());
-                            iterations.Add($"{b} ^ {a} = {result}");
-                            break;
+                        double a = temp.Pop();
+                        double b = temp.Pop();
+                        switch (input[i])
+                        {
+                            case '+':
+                                result = b + a;
+                                iterations.Add($"{b} + {a} = {result}");
+                                break;
+                            case '-':
+                                result = b - a;
+                                iterations.Add($"{b} - {a} = {result}");
+                                break;
+                            case '*':
+                                result = b * a;
+                                iterations.Add($"{b} * {a} = {result}");
+                                break;
+                            case '/':
+                                result = b / a;
+                                iterations.Add($"{b} / {a} = {result}");
+                                break;
+                            case '^':
+                                result = Math.Sqrt(b);
+                                iterations.Add($"sqrt({b}");
+                                break;
+                        }
+                        
+                    }
+                    else
+                    {
+                        double b = temp.Pop();
+                        switch (input[i])
+                        {
+                            case '^':
+                                result = Math.Sqrt(b);
+                                iterations.Add($"sqrt({b})");
+                                break;
+                        }
+                        
                     }
                     temp.Push(result);
                 }
