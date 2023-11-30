@@ -148,6 +148,7 @@ namespace CalcFraction.Pages
                                 switch (input[i])
                                 {
                                     case '+':
+   
                                         result = b + a;
                                         iterations.Add($"{b} + {a} = {DoubleToNormalFraction(result)}");
                                         break;
