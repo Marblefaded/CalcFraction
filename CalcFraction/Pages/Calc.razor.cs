@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿/*using Microsoft.AspNetCore.Components;
 using System.Globalization;
 using static System.Net.Mime.MediaTypeNames;
 using System.Text.RegularExpressions;
@@ -283,4 +283,4 @@ namespace CalcFraction.Pages
 
 
     }
-}
+}*/
