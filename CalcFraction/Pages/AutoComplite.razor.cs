@@ -49,7 +49,7 @@ namespace CalcFraction.Pages
         public string solWord { get; set; } 
         public char[] newChanges { get; set; }
         public char[] oldChanges { get; set; }
-        public char[] resultChanges { get; set; }
+
         public bool flag = false;
         public int positionA { get; set; }
         public int positionB { get; set; }
@@ -126,13 +126,10 @@ namespace CalcFraction.Pages
                     if (arrOldInput[i] != arrNewInput[i])
                     {
                         solWord = arrNewInput[i];
-                        /*flag = false;*/
                     }
                     else
                     {
-
                         solWord = arrNewInput[arrNewInput.Length - 1];
-                        /*flag = false;*/
                     }
                 }
             }
@@ -152,7 +149,7 @@ namespace CalcFraction.Pages
             return clearString;
         }
 
-        public void CheckSimilar(string str)//проверка на совпадение startswith
+        public void CheckSimilar(string str)
         {
 
             ListOfTips = DataBaseStrings.Where(x => x.StartsWith(str.Trim())).ToList();
@@ -166,7 +163,6 @@ namespace CalcFraction.Pages
         [JSInvokable]
         public void MakeCoordinate(int x, int y)
         {
-
             _xAxis = $"{x}px";
             _yAxis = $"{y}px";
             Show = "block";
@@ -216,10 +212,6 @@ namespace CalcFraction.Pages
                         str += newChanges[placeA];
                         placeA++;
                     }
-                   /* if(InputString != _inputString)
-                    {
-                        flag = false;
-                    }*/
                     CheckSimilar(str);//Сюда надо определенную слово
                     CheckForShowTip();
                     StateHasChanged();
@@ -245,7 +237,7 @@ namespace CalcFraction.Pages
 
         public void CheckForShowTip()
         {
-            /*|| flag == true*/
+           
             if (ListOfTips.Count == 0 || ListOfTips.Count == DataBaseStrings.Count || flag == true)
             {
                 Show = "none";
@@ -291,8 +283,8 @@ namespace CalcFraction.Pages
                 addWord += newChanges[indexA];
                 indexA++;
             }
-            Wording(addWord, str);
-*/
+            Wording(addWord, str);*/
+
             str += " ";
             char[] letters = newChanges;
             List<char> charList = new List<char>(letters);
