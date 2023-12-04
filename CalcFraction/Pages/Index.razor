@@ -1,0 +1,45 @@
+﻿@page "/index"
+
+
+<h3>Component</h3>
+
+<div class="row justify-content-start">
+    <div class="col-sm-3">
+        <input id="btnCallCSharp" type="button" value="Call C# from JS" />
+    </div>
+    <div class="col-sm-3">
+        <span>
+            @msg
+        </span>
+
+    </div>
+
+</div>
+
+@code {
+    [Inject] IJSRuntime JSRuntime { get; set; }
+    private string msg = "";
+    private DotNetObjectReference<Pages.Index>? dotNetObjectReference;
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            dotNetObjectReference = DotNetObjectReference.Create(this);
+            await JSRuntime.InvokeVoidAsync("JsFunctions.RegisterDeleteCustomerFunc", dotNetObjectReference);
+        }
+    }
+
+    [JSInvokable]
+    public void DeleteCustmer(string customerGuid)
+    {
+        msg = $"Deleted customer with GUID {customerGuid}";
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        dotNetObjectReference?.Dispose();
+    }
+
+}

@@ -1,0 +1,28 @@
+﻿@page "/"
+@inherits AutoComplitePageViewe
+
+<body style="background-color: #121212">
+    <p style="text-align: center;">
+    <textarea id="textBoxId" type="text" placeholder="Введите текст" @bind-value="@InputString" @bind-value:event="oninput" />
+    </p>
+
+    <div id="listArea" style="position: absolute; left:@_xAxis; top: @_yAxis; display:@Show" class="tip-1">
+        @foreach (var item in ListOfTips)
+        {
+            <button onclick="@(()=>InputChoise(item))">@item</button>
+            <br />
+        }
+    </div>
+</body>
+
+
+<style>
+
+.tip-1 { 
+width: 150px;
+height: 150px;
+background-color: #eee;
+border: 2px solid #ccc;
+}
+</style>
+
