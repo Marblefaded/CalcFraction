@@ -222,7 +222,7 @@ namespace CalcFraction.Pages
         public void CheckForShowTip()
         {
             /*|| flag == true*/
-            if (ListOfTips.Count == 0 || ListOfTips.Count == DataBaseStrings.Count)
+            if (ListOfTips.Count == 0 || ListOfTips.Count == DataBaseStrings.Count || flag == true)
             {
                 Show = "none";
             }
