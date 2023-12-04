@@ -49,6 +49,7 @@ namespace CalcFraction.Pages
         public string solWord { get; set; } 
         public char[] newChanges { get; set; }
         public char[] oldChanges { get; set; }
+        public char[] resultChanges { get; set; }
         public bool flag = false;
         public int positionA { get; set; }
         public int positionB { get; set; }
@@ -92,16 +93,18 @@ namespace CalcFraction.Pages
                             positionB = i;
                         }
                     }
-                    var newChangesReverse = newChanges.Reverse().ToArray();
-                    for (int i = 0; i < positionB; i++)
+                    //var newChangesReverse = newChanges.Reverse().ToArray();
+                    for (int i = positionB; i >= 0; i--)
                     {
-                        if (newChangesReverse[i] == ' ' || newChangesReverse[i] == '\n' || i != newChanges.Length)
+                        if (newChanges[i] == ' ' || newChanges[i] == '\n')
                         {
                             positionA = i;
+                            break;
                         }
-                        else
+                        else if(i == 0)
                         {
-                            Console.WriteLine("Error");
+                            positionA = i;
+                            break;
                         }
                     }
 
@@ -179,9 +182,27 @@ namespace CalcFraction.Pages
             {
                 if (oldChanges.Length > newChanges.Length)
                 {
+                    Between(oldChanges, newChanges);
+                    var oldString = new string(oldChanges);
+                    string[] strOld = oldString.Replace("\n", " ").Split(" ");
+                    var strNew = ClearString().Split(" ");
+                    var min = Math.Min(strOld.Length, strNew.Length);
+                    string str = "";
+                    for (int i = 0; i < min; i++)
+                    {
+                        if (strNew[i] != strOld[i])
+                        {
+                            str = strNew[i];
+                            break;
+                        }
+                    }
                     oldChanges = newChanges;
                     oldInput = _inputString;
-                    Show = "none";
+                    flag = false;
+                    
+                    CheckSimilar(str);//Сюда надо определенную слово
+                    CheckForShowTip();
+                    StateHasChanged();
                 }
                 else
                 {
@@ -195,7 +216,10 @@ namespace CalcFraction.Pages
                         str += newChanges[placeA];
                         placeA++;
                     }
-
+                   /* if(InputString != _inputString)
+                    {
+                        flag = false;
+                    }*/
                     CheckSimilar(str);//Сюда надо определенную слово
                     CheckForShowTip();
                     StateHasChanged();
@@ -248,7 +272,7 @@ namespace CalcFraction.Pages
         }
 
 
-        public void InputChoise(string str)
+        public void InputChoise(string str)//надо чтоб ставил пробел после слова для вставки
         {
             Show = "none";
             flag = true;
@@ -269,6 +293,7 @@ namespace CalcFraction.Pages
             }
             Wording(addWord, str);
 */
+            str += " ";
             char[] letters = newChanges;
             List<char> charList = new List<char>(letters);
             charList.RemoveRange(positionA, positionB - positionA + 1);
@@ -288,7 +313,7 @@ namespace CalcFraction.Pages
             Array.Copy(letters, positionA, result, positionA + wordArray.Length, letters.Length - positionA);
             /*result[result.Length-1] = ' ';*/
             
-            InputString = new string(result) + " ";
+            InputString = new string(result);
             
 
             ReturnToTextArea();
