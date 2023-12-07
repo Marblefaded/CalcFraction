@@ -1,0 +1,31 @@
+﻿@page "/"
+@inject IWebHostEnvironment WebHostEnvironment
+@inherits UploadView
+@using BlazorBootstrap
+
+<div class="text-center" style="font-size:25px">
+    @for (int i = 0; i < numberOfInputFiles; i++)
+    {
+        <InputFile @key="i" OnChange="@(e => OnFileChanged(e, i))" multiple style="@GetInputFileStyle(i)"></InputFile>
+
+    }
+    <br />
+    <p>
+        Статус загрузки файла
+    </p>
+    <Progress Class="position-absolute top-10 start-50 translate-middle-x" Height="20" Style="width: 300px;">
+        <ProgressBar @ref="progressBar" />
+    </Progress>
+    <span id="progress" style="color : cadetblue">
+
+    </span>
+    <br />
+    @foreach (var fileProgress in fileUploadProgress)
+    {
+        <p>@fileProgress.Key</p>
+
+    }
+</div>
+
+
+

@@ -113,7 +113,7 @@ namespace CalcFraction.Pages
             }
         }
 
-        public void CheckWord()
+       /* public void CheckWord()
         {
             oldInput = oldInput.Replace("\n", " ");
             var arrOldInput = oldInput.Split(' ');
@@ -135,7 +135,7 @@ namespace CalcFraction.Pages
             }
             
             
-        }
+        }*/
 
         public string TakeLastWord()
         {
