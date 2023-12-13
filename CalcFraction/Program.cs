@@ -1,5 +1,9 @@
+using CalcDB;
+using CalcFraction.Data.Service;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +11,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
 builder.Services.AddBlazorBootstrap(); // Add this line
-
+builder.Services.AddScoped<ExcelService>();
+string connection = builder.Configuration.GetConnectionString("ConnectionString");
+builder.Services.AddDbContext<CalcContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CalcContext")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

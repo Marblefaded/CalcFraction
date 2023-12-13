@@ -6,3 +6,7 @@ function updating(percent) {
     document.getElementById('progress').innerHTML = percent + "%";
     
 }
+
+function clickInputFile() {
+    document.getElementById("loaderImage").click();
+}
