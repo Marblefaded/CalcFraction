@@ -1,0 +1,88 @@
+{
+  "result": [
+    {
+      "status": "active",
+      "name": {
+        "first": "Marcellus",
+        "middle": "Jordan",
+        "last": "Farrell"
+      },
+      "username": "Marcellus-Farrell",
+      "password": "ELk_MapaRPMBA64",
+      "emails": [
+        "Corrine_Douglas46@gmail.com",
+        "Emmie_Lubowitz@example.com"
+      ],
+      "phoneNumber": "597-430-9380 x045",
+      "location": {
+        "street": "380 Parisian Forge",
+        "city": "Kemmerfort",
+        "state": "New Hampshire",
+        "country": "Guyana",
+        "zip": "24558-4908",
+        "coordinates": {
+          "latitude": -82.5609,
+          "longitude": -138.3022
+        }
+      },
+      "website": "https://putrid-utensil.net",
+      "domain": "imaginative-reporting.net",
+      "job": {
+        "title": "Regional Quality Assistant",
+        "descriptor": "Corporate",
+        "area": "Marketing",
+        "type": "Coordinator",
+        "company": "Kuhlman - Kuhn"
+      },
+      "creditCard": {
+        "number": "3712-743201-77548",
+        "cvv": "567",
+        "issuer": "visa"
+      },
+      "uuid": "67a3aefd-f37b-4758-af9a-bdd2963e093d",
+      "objectId": "6579619201ec56bfb71b9c35"
+    },
+    {
+      "status": "active",
+      "name": {
+        "first": "Zakary",
+        "middle": "Avery",
+        "last": "Klocko"
+      },
+      "username": "Zakary-Klocko",
+      "password": "TMymigG5tl8zkSs",
+      "emails": [
+        "Kurtis89@example.com",
+        "Kiana94@example.com"
+      ],
+      "phoneNumber": "1-273-405-5169",
+      "location": {
+        "street": "71435 Kimberly Skyway",
+        "city": "Salem",
+        "state": "Virginia",
+        "country": "Eritrea",
+        "zip": "07480-6433",
+        "coordinates": {
+          "latitude": -4.077,
+          "longitude": -65.9333
+        }
+      },
+      "website": "https://joyous-press.biz/",
+      "domain": "illustrious-commitment.net",
+      "job": {
+        "title": "Human Brand Assistant",
+        "descriptor": "Legacy",
+        "area": "Directives",
+        "type": "Director",
+        "company": "Beahan LLC"
+      },
+      "creditCard": {
+        "number": "3626-957143-2557",
+        "cvv": "349",
+        "issuer": "mastercard"
+      },
+      "uuid": "c2d0fe81-7369-4fd5-92d8-9d8a674cdfd5",
+      "objectId": "6579619201ec56bfb71b9c36"
+    }
+  ]
+}

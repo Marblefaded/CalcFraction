@@ -8,7 +8,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcFraction", "CalcFractio
 		{916F4CF1-084C-4CF9-A43A-BA23A7A5FDD4} = {916F4CF1-084C-4CF9-A43A-BA23A7A5FDD4}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcDB", "CalcDB\CalcDB.csproj", "{916F4CF1-084C-4CF9-A43A-BA23A7A5FDD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcDB", "CalcDB\CalcDB.csproj", "{916F4CF1-084C-4CF9-A43A-BA23A7A5FDD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

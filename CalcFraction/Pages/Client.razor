@@ -1,0 +1,62 @@
+﻿@page "/"
+@inherits ClientView
+@using BlazorBootstrap
+@inject IWebHostEnvironment WebHostEnvironment
+@* <body style="background-color: white;color:black;font-size:20px"> *@
+<div class="text-center">
+    @for (int i = 0; i < numberOfInputFiles; i++)
+    {
+        <InputFile @key="i" OnChange="@(e => OnFileChanged(e, i))" multiple style="@GetInputFileStyle(i)"></InputFile>
+
+    }
+    <br />
+    <br />
+
+    <Progress Class="position-absolute top-10 start-50 translate-middle-x" Height="20" Style="width: 300px;">
+        <ProgressBar @ref="progressBar" />
+    </Progress>
+    <br />
+
+
+</div>
+<br />
+<br />
+
+@if (clientViewModels.Count != 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Credit card</th>
+                <th scope="col">Cvv</th>
+                <th scope="col">Uuid</th>
+                <th scope="col">Location street</th>
+                <th scope="col">Location zip</th>
+                <th scope="col">Job</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var client in clientViewModels)
+            {
+                <tr>
+                    <td>@client.cardNumber</td>
+                    <td>@client.cvv</td>
+                    <td>@client.uuid</td>
+                    <td>@client.street</td>
+                    <td>@client.zip</td>
+                    <td>@client.area</td>
+                    <td>@client.phoneNumber</td>
+                    <td>@client.username</td>
+                    <td>@client.password</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+
+}
+
+
