@@ -1,0 +1,45 @@
+﻿@page "/"
+@inject IJSRuntime jsRuntime
+@using BrowserInterop.Extensions
+@using BrowserInterop.Geolocation
+
+<h3>GPS Tracking</h3>
+
+<h3>Your Position</h3>
+<button class="btn btn-primary" @onclick="GetLocation">Get Position</button>
+@if(geolocationPosition != null)
+{
+    <div>
+        Latitude: @geolocationPosition.Coords.Latitude <br />
+        Longitude: @geolocationPosition.Coords.Longitude <br />
+        Accuracy: @geolocationPosition.Coords.Accuracy <br />
+    </div>
+}
+
+@code{
+    private WindowNavigatorGeolocation geolocation;
+    private GeolocationPosition geolocationPosition;
+
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //if (firstRender)
+        //{
+            var window = await jsRuntime.Window();
+            var navigator = await window.Navigator();
+            geolocation = navigator.Geolocation;
+        //}
+    }
+
+    public async Task GetLocation()
+    {
+        geolocationPosition = (await geolocation.GetCurrentPosition(new PositionOptions()
+            {
+                EnableHighAccuracy = true,
+                MaximumAgeTimeSpan= TimeSpan.FromHours(1),
+                TimeoutTimeSpan = TimeSpan.FromMinutes(1)
+    })).Location;
+    }
+
+}
