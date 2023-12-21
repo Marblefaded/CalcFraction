@@ -1,0 +1,42 @@
+﻿@page "/"
+@using QRCoder;
+
+<table>
+    <tr>
+        <td>
+            <input @bind="texto" />
+            <button class="btn btn-primary" @onclick="GeneratorQr">Generate ur QR</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+           
+            <img src="@imageDataUrl"
+        </td>
+    </tr>
+</table>
+@code{
+    string texto = "";
+    string qrTexto = "";
+    string imageDataUrl = "";
+
+    private void GeneratorQr()
+    {
+        QRCodeGenerator generator = new QRCodeGenerator();
+        var qr = generator.CreateQrCode(texto, QRCodeGenerator.ECCLevel.Q);
+        BitmapByteQRCode bitMap = new BitmapByteQRCode(qr);
+        byte[] arraybytes = bitMap.GetGraphic(10);
+
+        MemoryStream ms = new MemoryStream();
+        ms.Write(arraybytes);
+        byte[] imagen = ms.ToArray();
+        qrTexto = Convert.ToBase64String(imagen);
+        imageDataUrl = "data:image/png;base64," + qrTexto;
+
+        StateHasChanged();
+
+
+
+
+    }
+}
