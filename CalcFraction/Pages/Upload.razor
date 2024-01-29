@@ -1,4 +1,4 @@
-﻿@* @page "/" *@
+﻿@* @page "/"
 @inject IWebHostEnvironment WebHostEnvironment
 @inherits UploadView
 @using BlazorBootstrap
@@ -6,9 +6,9 @@
 <div class="text-center" style="font-size:25px">
     @for (int i = 0; i < numberOfInputFiles; i++)
     {
-        @* <InputFile @key="i" OnChange="@(e => OnFileChanged(e, i))" multiple style="@GetInputFileStyle(i)"></InputFile> *@
+        <InputFile @key="i" OnChange="@(e => OnFileChanged(e, i))" multiple style="@GetInputFileStyle(i)"></InputFile>
         <InputFile id="loaderImage" OnChange="@SaveFiles" multiple />
-        @* <button @onclick="(()=>ProcessExcelFile(ListNewUser))">Заполнить таблицу</button> *@
+        <button @onclick="(()=>ProcessExcelFile(ListNewUser))">Заполнить таблицу</button>
     }
     <br />
     <p>
@@ -17,9 +17,9 @@
     <Progress Class="position-absolute top-10 start-50 translate-middle-x" Height="20" Style="width: 300px;">
         <ProgressBar @ref="progressBar" />
     </Progress>
-    @* <p style="font-size:14px">
+    <p style="font-size:14px">
         @Error
-    </p> *@
+    </p>
     <span id="progress" style="color : cadetblue">
 
     </span>
@@ -36,3 +36,4 @@
 
 
 
+ *@

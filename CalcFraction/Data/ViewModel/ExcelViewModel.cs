@@ -1,4 +1,4 @@
-﻿using CalcDB.Models;
+﻿/*using CalcDB.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace CalcFraction.Data.ViewModel
@@ -50,3 +50,4 @@ namespace CalcFraction.Data.ViewModel
         }
     }
 }
+*/

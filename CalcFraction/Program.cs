@@ -1,5 +1,6 @@
 using CalcDB;
 using CalcFraction.Data.Service;
+using MatBlazor;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
 builder.Services.AddBlazorBootstrap(); // Add this line
-builder.Services.AddScoped<ExcelService>();
+builder.Services.AddScoped<ZooService>();
+builder.Services.AddMatBlazor();
 string connection = builder.Configuration.GetConnectionString("ConnectionString");
 builder.Services.AddDbContext<CalcContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CalcContext")));
 var app = builder.Build();

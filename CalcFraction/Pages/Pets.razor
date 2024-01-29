@@ -1,0 +1,49 @@
+﻿@inherits PetsView
+@page "/"
+<body class="text-center" style="background-color:#696969">
+
+    <h3>Pets</h3>
+
+    <button class="btn btn-primary" @onclick="(()=>Counting())">Tap</button>
+    <input @bind-value="@Search" @bind-value:event="oninput" />
+    <button class="btn btn-primary" @onclick="CreateItem">
+        Создать
+    </button>
+
+    @if(count != 0)
+    {
+        <h3>
+            @count
+        </h3>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">PetsId</th>
+                <th scope="col">Name</th>
+                <th scope="col">TypeOfAnimal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var client in Model)
+            {
+                <tr>
+                    <td>@client.PetsId</td>
+                    <td>@client.Name</td>
+                    <td>@client.TypeOfAnimal</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="(()=>EditItem(client))">
+                            Редактировать
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+
+@if (zooModel != null && EditModel.DialogIsOpen)
+{
+    <EditPets ViewModel="EditModel" Save="Save" />
+}

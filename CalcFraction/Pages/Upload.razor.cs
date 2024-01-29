@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿/*using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using System.Reflection.Metadata.Ecma335;
@@ -21,7 +21,7 @@ namespace CalcFraction.Pages
         [Inject]
         protected IWebHostEnvironment HostingEnv { get; set; }
         [Inject]
-        protected ExcelService ExcelService { get; set; }
+        protected ZooService ExcelService { get; set; }
 
         protected List<ExcelViewModel> ExcelModel = new List<ExcelViewModel>();
         protected List<ExcelViewModel> ListNewUser = new List<ExcelViewModel>();
@@ -42,7 +42,7 @@ namespace CalcFraction.Pages
 
 
 
-        /*public async Task OnFileChanged(InputFileChangeEventArgs e, int index)
+        *//*public async Task OnFileChanged(InputFileChangeEventArgs e, int index)
         {
             numberOfInputFiles++;
 
@@ -97,7 +97,7 @@ namespace CalcFraction.Pages
             *//*string strPercent = percent.ToString();*//*
             string strPercent = Convert.ToInt32(percent).ToString();
             Js.InvokeVoidAsync("updating", strPercent);
-        }*/
+        }*//*
 
         //другой код
 
@@ -181,7 +181,7 @@ namespace CalcFraction.Pages
                         ListNewUser.Clear();
                         return;
                     }
-                    /*int percent = 39 / 100;*/
+                    *//*int percent = 39 / 100;*//*
                     for (int i = sheet.FirstRowNum + 1; i <= sheet.LastRowNum; i++)
                     {
                         ExcelViewModel userViewModel = new ExcelViewModel();
@@ -293,13 +293,13 @@ namespace CalcFraction.Pages
                         }
 
                         ExcelService.Create(userViewModel);
-                        /*percent += percent;
+                        *//*percent += percent;
                         progressBar.IncreaseWidth(percent);
                         progressBar.SetLabel($"{progressBar.GetWidth()}%");*/
                         /*foreach (var item in ListNewUser)
                         {
                             var rezult = ExcelService.Create(item);
-                        }*/
+                        }*//*
 
                     }
                 }
@@ -311,12 +311,13 @@ namespace CalcFraction.Pages
         {
             Js.InvokeVoidAsync("clickInputFile");
         }
-        /*public void ProcessExcelFile()
+        *//*public void ProcessExcelFile()
         {
             foreach (var item in ListNewUser)
             {
                 var rezult = ExcelService.Create(item);
             }
-        }*/
+        }*//*
     }
 }
+*/

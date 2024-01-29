@@ -1,0 +1,41 @@
+﻿@using CalcFraction.Data;
+@using MatBlazor
+@inherits EditPetsView
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.Extensions.Logging
+@inject IWebHostEnvironment Environment
+
+
+<MatDialog @bind-IsOpen="@ViewModel.DialogIsOpen" CanBeClosed="false">
+    <EditForm class="dialog" Model="ViewModel.Model" OnValidSubmit="@(()=>{Save.InvokeAsync(ViewModel.Model);})">
+        <MatDialogTitle>
+            <div class="tahomal">
+                <p>Edit</p>
+            </div>
+            <div class="tahomar">
+                <input class="btn-createstudent" type="submit" value="Сохранить" />
+                <span class="btn text-right" @onclick="@(()=>ViewModel.DialogIsOpen=false)">X</span>
+            </div>
+        </MatDialogTitle>
+        <MatDialogContent>
+            <div>
+                <label class="text-white" for="Name">Тема диплома</label>
+                <InputText class="form_edit" @bind-Value="ViewModel.Model.Name" id="title"></InputText>
+            </div>
+            
+            <div>
+                <label class="text-white">
+                    Вид животного
+                </label>
+                
+                <select @bind="ViewModel.Model.TypeOfAnimal">
+                    @foreach (var item in Globals.AnimalsDictionary)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+            </div>
+        </MatDialogContent>
+    </EditForm>
+</MatDialog>
+
